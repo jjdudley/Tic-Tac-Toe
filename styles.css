@@ -1,0 +1,22 @@
+body {
+    background-color: lightgrey;
+}
+
+#game-board {
+    width: 450px;
+    height: 450px;
+    display: grid;
+    border-collapse: collapse;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto)
+}
+
+.cell {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+
+}
