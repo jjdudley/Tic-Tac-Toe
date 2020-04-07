@@ -41,8 +41,8 @@ const playerMove = (() => {
 
     // create variable to keep track of turns
     let x_turn = true;
-
-    // use DOM to update board array with player selections upon click
+    let roundCount = 0;
+    // use DOM to update board array with player selections
     const cellElements = document.querySelectorAll('[data-cell]');
     let cellArray = Array.from(cellElements);
     cellElements.forEach(cell => {
@@ -62,12 +62,16 @@ const playerMove = (() => {
             x_turn = false;
             playerTurn.innerText = 'Player O\'s turn';
             checkWin();
+            roundCount++;
+            console.log(roundCount);
         } else if (!x_turn) {
             gameBoard.board[numba] = 'o';
             gameBoard.updateBoard();
             x_turn = true;
             playerTurn.innerText = 'Player X\'s turn';
             checkWin();
+            roundCount++
+            console.log(roundCount);
         };
     };
 
@@ -84,55 +88,59 @@ const playerMove = (() => {
             playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[0]== 'o' && gameBoard.board[1] == 'o' && gameBoard.board[2] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[3]== 'x' && gameBoard.board[4] == 'x' && gameBoard.board[5] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[3]== 'o' && gameBoard.board[4] == 'o' && gameBoard.board[5] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[6]== 'x' && gameBoard.board[7] == 'x' && gameBoard.board[8] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[6]== 'o' && gameBoard.board[7] == 'o' && gameBoard.board[8] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[0]== 'x' && gameBoard.board[3] == 'x' && gameBoard.board[6] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[0]== 'o' && gameBoard.board[3] == 'o' && gameBoard.board[6] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[1]== 'x' && gameBoard.board[4] == 'x' && gameBoard.board[7] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[1]== 'o' && gameBoard.board[4] == 'o' && gameBoard.board[7] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[2]== 'x' && gameBoard.board[5] == 'x' && gameBoard.board[8] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[2]== 'o' && gameBoard.board[5] == 'o' && gameBoard.board[8] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[0]== 'x' && gameBoard.board[4] == 'x' && gameBoard.board[8] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[0]== 'o' && gameBoard.board[4] == 'o' && gameBoard.board[8] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
             deactivateCells();
         } else if (gameBoard.board[2]== 'x' && gameBoard.board[4] == 'x' && gameBoard.board[6] == 'x') {
-            playerTurn.innerText = 'X wins!'
+            playerTurn.innerText = 'X wins!';
             deactivateCells();
         } else if (gameBoard.board[2]== 'o' && gameBoard.board[4] == 'o' && gameBoard.board[6] == 'o') {
-            playerTurn.innerText = 'O wins!'
+            playerTurn.innerText = 'O wins!';
+            deactivateCells();
+        } else if (roundCount = 9 && gameBoard.board.includes('') == false) {
+            playerTurn.innerText = 'Draw!';
             deactivateCells();
         }
     };
 
     return {
         playerTurn,
+        roundCount,
         handleClick,
         deactivateCells,
         addToBoard,
