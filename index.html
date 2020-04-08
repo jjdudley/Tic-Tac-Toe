@@ -8,17 +8,25 @@
 </head>
 <container id="game-container">
     <h1>Tic Tac Toe</h1>
-    <h1 id="player-turn">Player X's Turn</h1>
+    <form id="start-game-form">
+        <button type="submit" id="start-game-btn">New Game</button>
+       
+        <input data-player-1-input type="text" class="player-names" placeholder="Player 1">
+        
+        <input data-player-2-input type="text" class="player-names" placeholder="Player 2">
+    </form>
+    <button id="restart-btn">Play again?</button>
+    <h1 id="player-turn"></h1>
     <div id="game-board">
-            <div data-cell id="cell1" class="cell"></div>
-            <div data-cell id="cell2" class="cell"></div>
-            <div data-cell id="cell3" class="cell"></div>
-            <div data-cell id="cell4" class="cell"></div>
-            <div data-cell id="cell5" class="cell"></div>
-            <div data-cell id="cell6" class="cell"></div>
-            <div data-cell id="cell7" class="cell"></div>
-            <div data-cell id="cell8" class="cell"></div>
-            <div data-cell id="cell9" class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
+            <div data-cell class="cell"></div>
     </div>
 </container>
 <script src="script.js"></script>
