@@ -124,6 +124,7 @@ const game = (() => {
     function addToBoard(e) {
         let cell = e.target;
         let selectedCell = cellArray.indexOf(cell);
+        cell.setAttribute("id", selectedCell);
 
         if(x_turn) {
             cell.innerText = player1.mark;
@@ -149,6 +150,7 @@ const game = (() => {
 
         let playerOneWin = false;
         let playerTwoWin = false;
+        let winningLine;
 
         function flatten(arr) {
             let flatArray = [];
@@ -170,6 +172,10 @@ const game = (() => {
                 if(gameBoard.playerOneSelections.indexOf(newArray[0]) !== -1) {
                     if(gameBoard.playerOneSelections.indexOf(newArray[1]) !== -1) {
                         if(gameBoard.playerOneSelections.indexOf(newArray[2]) !== -1) {
+                            winningLine = winningCombinations[i];
+                            for (let i = 0; i < winningLine.length; i++) {
+                                document.getElementById(winningLine[i]).classList.toggle('winningLine');
+                            };
                             playerOneWin = true;
                             return;
                         };
@@ -187,6 +193,10 @@ const game = (() => {
                 if(gameBoard.playerTwoSelections.indexOf(newArray[0]) !== -1) {
                     if(gameBoard.playerTwoSelections.indexOf(newArray[1]) !== -1) {
                         if(gameBoard.playerTwoSelections.indexOf(newArray[2]) !== -1) {
+                            winningLine = winningCombinations[i];
+                            for (let i = 0; i < winningLine.length; i++) {
+                                document.getElementById(winningLine[i]).classList.toggle('winningLine');
+                            };
                             playerTwoWin = true;
                             return;
                         };
@@ -345,7 +355,7 @@ const playerMove = (() => {
     };
 
     function addToBoard(cell) {
-        let numba = cellArray.indexOf(cell);
+        let numba; = cellArray.indexOf(cell)
         if(x_turn) {
             gameBoard.board[numba] = 'x';
             gameBoard.updateBoard();
