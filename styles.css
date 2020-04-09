@@ -21,14 +21,17 @@ body {
     justify-content: center;
     align-content: center;
     align-items: center;
+    margin-bottom: 25px;
 }
+
 #game-title {
     font-size: 20pt;
     color: rgb(213, 235, 248);
     justify-self: center;
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 18px;
 }
+
 #game-board {
     width: 468px;
     height: 468px;
@@ -47,7 +50,6 @@ body {
     border: 3px solid rgb(213, 235, 248);
     display: flex;
     justify-content: center;
-    
     text-align: center;
     vertical-align: middle;
     position: relative;
@@ -67,23 +69,36 @@ body {
     border-color: rgb(179, 210, 228);
     color: rgb(55, 103, 131);
     background-color: rgb(179, 210, 228);
+    margin-left: 32px;
 }
 
 #start-game-btn:hover {
     cursor: pointer;
+    background-color: rgb(168, 196, 212);
+    border-color: rgb(168, 196, 212);
 }
 
 .player-names {
     color: gray;
-    background-color: rgb(242, 247, 250);
-    border-color: rgb(242, 247, 250);
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
     border-radius: 4px;
     padding: 0.45rem 0.8rem;
     outline: none;
+    margin: 0 2px;
+}
+
+.player-names:hover {
+    background-color: rgb(247, 250, 252);
+    border-color: rgb(247, 250, 252);
 }
 
 #player-turn {
+    font-size: 20pt;
     color: rgb(213, 235, 248);
+    justify-self: center;
+    padding-top: 0;
+    margin-bottom: 22px;
 }
 
 #restart-btn {
@@ -94,4 +109,13 @@ body {
     border-color: rgb(179, 210, 228);
     color: rgb(55, 103, 131);
     background-color: rgb(179, 210, 228);
+    justify-self: center;
+    margin-top: 15px;
+    outline: none;
+}
+
+#restart-btn:hover {
+    cursor: pointer;
+    background-color: rgb(168, 196, 212);
+    border-color: rgb(168, 196, 212);
 }

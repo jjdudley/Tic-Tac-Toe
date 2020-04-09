@@ -43,6 +43,7 @@ const player2 = Player('Player 2', 'O');
 const game = (() => {
     
     const playerTurn = document.getElementById('player-turn');
+    playerTurn.style.display = "none";
     let x_turn = true;
     let roundCount = 0;
     let player1name;
@@ -69,14 +70,16 @@ const game = (() => {
         // select for "home screen" buttons
         const restartBtn = document.getElementById('restart-btn');
         restartBtn.addEventListener('click', resetDisplay);
-        restartBtn.style.visibility = 'hidden';
+        restartBtn.style.display = 'none';
         restartBtn.addEventListener('click', resetDisplay);
             function resetDisplay () {
                 playerTurn.innerText = '';
-                playerOneNameInput.style.visibility = 'visible';
-                playerTwoNameInput.style.visibility = 'visible';
-                startBtn.style.visibility = 'visible';
-                restartBtn.style.visibility = 'hidden';
+                playerTurn.style.display = 'none';
+                playerOneNameInput.style.display = 'inline';
+                playerTwoNameInput.style.display = 'inline';
+                startGame.style.display = 'inline';
+                startBtn.style.display = 'inline';
+                restartBtn.style.display = 'none';
                 cellElements.forEach(cell => {
                     cell.innerText = '';
                     cell.setAttribute('id', '');
@@ -101,10 +104,12 @@ const game = (() => {
             player1name = playerOneNameInputVal;
             player2name = playerTwoNameInputVal;
        
-            playerOneNameInput.style.visibility = 'hidden';
-            playerTwoNameInput.style.visibility = 'hidden';
-            startBtn.style.visibility = 'hidden';
+            playerOneNameInput.style.display = 'none';
+            playerTwoNameInput.style.display = 'none';
+            startGame.style.display = 'none';
+            startBtn.style.display = 'none';
             playerTurn.innerText =`${playerOneNameInputVal}'s turn`;
+            playerTurn.style.display = 'inline';
         };
 
 
@@ -247,7 +252,7 @@ const game = (() => {
             cell.removeEventListener('click', addToBoard, { once: true });
         });
         roundCount = 0;
-        displayController.restartBtn.style.visibility = 'visible';
+        displayController.restartBtn.style.display = 'inline';
     };
 
 
