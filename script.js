@@ -3,25 +3,28 @@ const gameBoard = (() => {
     let playerOneSelections = [];
     let playerTwoSelections = [];
 
-    function resetGame() {
-        playerOneSelections = [];
-        playerTwoSelections = [];
+    function resetPlayers() {
+        this.playerOneSelections = [];
+        this.playerTwoSelections = [];
     };
 
     return {
         playerOneSelections,
         playerTwoSelections,
-        resetGame,
+        resetPlayers,
     };
 })();
 
 
+
+/////////////////////////////////////////////
 
 
 
 
 const Player = (name, mark) => {
 
+    
     return {
         name,
         mark,
@@ -33,13 +36,17 @@ const player2 = Player('Player 2', 'O');
 
 
 
+//////////////////////////////////////
+
 
 
 const game = (() => {
-    let gameStart = true;
+    
     const playerTurn = document.getElementById('player-turn');
     let x_turn = true;
     let roundCount = 0;
+    let player1name;
+    let player2name;
     const winningCombinations = [
         [0, 1, 2],
         [3, 4, 5],
@@ -52,15 +59,68 @@ const game = (() => {
     ];
 
     const cellElements = document.querySelectorAll('[data-cell]');
+    let cellArray = Array.from(cellElements);
+
+
+
+    // create module to control display
+    const displayController = (() => {
+
+        // select for "home screen" buttons
+        const restartBtn = document.getElementById('restart-btn');
+        restartBtn.addEventListener('click', resetDisplay);
+        restartBtn.style.visibility = 'hidden';
+        restartBtn.addEventListener('click', resetDisplay);
+            function resetDisplay () {
+                playerTurn.innerText = '';
+                playerOneNameInput.style.visibility = 'visible';
+                playerTwoNameInput.style.visibility = 'visible';
+                startBtn.style.visibility = 'visible';
+                restartBtn.style.visibility = 'hidden';
+                cellElements.forEach(cell => {
+                    cell.innerText = '';
+                });
+            }
+
+        const startGame = document.forms['start-game-form'];
+        startGame.addEventListener('submit', startFunction);
+        const playerOneNameInput = startGame.querySelector('[data-player-1-input]')
+        const playerTwoNameInput = startGame.querySelector('[data-player-2-input]')
+
+
+        const startBtn = document.getElementById('start-game-btn');
+    
+        // create function to hide home screen and start game
+        function startFunction(e) {
+            e.preventDefault();
+            activateCells();
+            let playerOneNameInputVal = startGame.querySelector('[data-player-1-input]').value;
+            let playerTwoNameInputVal = startGame.querySelector('[data-player-2-input]').value;
+            player1name = playerOneNameInputVal;
+            player2name = playerTwoNameInputVal;
+       
+            playerOneNameInput.style.visibility = 'hidden';
+            playerTwoNameInput.style.visibility = 'hidden';
+            startBtn.style.visibility = 'hidden';
+            playerTurn.innerText =`${playerOneNameInputVal}'s turn`;
+        };
+
+
+        return {
+            restartBtn,
+            startFunction,
+            resetDisplay,
+        }
+    })();
 
     // create array from cells in order to grab index # of cell
-    let cellArray = Array.from(cellElements);
-    cellElements.forEach(cell => {
-        if(gameStart) {
+    function activateCells () {
+        cellElements.forEach(cell => {
             cell.addEventListener('click', addToBoard, { once: true });
-        };
-    });
+        });
+    };
 
+    // create function to update board with player moves (x's and o's) upon click event
     function addToBoard(e) {
         let cell = e.target;
         let selectedCell = cellArray.indexOf(cell);
@@ -69,7 +129,7 @@ const game = (() => {
             cell.innerText = player1.mark;
             gameBoard.playerOneSelections.push(selectedCell);
             x_turn = false;
-            playerTurn.innerText = 'P2s turn';
+            playerTurn.innerText = `${player2name}'s turn`;
             roundCount++
             checkWin();
             console.log(roundCount);
@@ -78,7 +138,7 @@ const game = (() => {
             cell.innerText = player2.mark;
             gameBoard.playerTwoSelections.push(selectedCell);
             x_turn = true;
-            playerTurn.innerText = 'P1s turn';
+            playerTurn.innerText = `${player1name}'s turn`;
             roundCount++
             checkWin();
             console.log(roundCount);
@@ -104,7 +164,7 @@ const game = (() => {
             return flatArray;
         };
 
-        function checkPlayerOneWin() {
+        const checkPlayerOneWin = (() => {
             for (let i = 0; i < winningCombinations.length; i++) {
                 let newArray = flatten(winningCombinations[i]);
                 if(gameBoard.playerOneSelections.indexOf(newArray[0]) !== -1) {
@@ -119,9 +179,9 @@ const game = (() => {
                 };
             };
             return;
-        };
+        })();
 
-        function checkPlayerTwoWin() {
+        const checkPlayerTwoWin = (() => {
             for (let i = 0; i < winningCombinations.length; i++) {
                 let newArray = flatten(winningCombinations[i]);
                 if(gameBoard.playerTwoSelections.indexOf(newArray[0]) !== -1) {
@@ -136,34 +196,29 @@ const game = (() => {
                 };
             };
             return;
-        };
-
-        checkPlayerOneWin();
-        checkPlayerTwoWin();
+        })();
         
         if (playerOneWin === true) {
             console.log('player 1 wins');
+            playerTurn.innerText = `${player1name} wins!`;
             resetBoard();
+            gameBoard.resetPlayers();
         } else if (playerTwoWin === true) {
             console.log('player 2 wins');
+            playerTurn.innerText = `${player2name} wins!`;
             resetBoard();
+            gameBoard.resetPlayers();
         } else if (!playerOneWin && !playerTwoWin) {
             console.log(`roundCount: ${roundCount}`);
             if(roundCount === 9) {
                 console.log('Draw');
+                playerTurn.innerText = 'It\'s a draw!';
                 resetBoard();
+                gameBoard.resetPlayers();
             }
         } else {
             return;
         }
-
-        function resetBoard() {
-            cellElements.forEach(cell => {
-                cell.innerText = '';
-                cell.removeEventListener('click', addToBoard, { once: true });
-            });
-            gameStart = false;
-        };
 
         return {
             playerOneWin,
@@ -175,12 +230,21 @@ const game = (() => {
         };
     };
 
+    function resetBoard() {
+        cellElements.forEach(cell => {
+            cell.removeEventListener('click', addToBoard, { once: true });
+        });
+        roundCount = 0;
+        displayController.restartBtn.style.visibility = 'visible';
+    };
+
 
     return {
         roundCount,
-        gameStart,
+        displayController,
         playerTurn,
         checkWin,
+        resetBoard,
     };
 })();
 
