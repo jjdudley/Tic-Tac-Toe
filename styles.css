@@ -1,12 +1,33 @@
-body {
-    background-color: lightgrey;
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
 }
 
-#game-board {
-    width: 450px;
-    height: 450px;
+body {
+    background-color: rgb(55, 103, 131);
+}
+
+::placeholder {
+    color: rgb(143, 143, 143);
+}
+
+#game-container {
     display: grid;
-    border-collapse: collapse;
+    justify-content: center;
+    align-content: center;
+}
+
+#game-title {
+    color: rgb(213, 235, 248);
+}
+#game-board {
+    width: 468px;
+    height: 468px;
+    display: grid;
+    border: solid 3px rgb(213, 235, 248);
+    background-color: rgb(179, 210, 228);
     justify-content: center;
     align-content: center;
     justify-items: center;
@@ -15,12 +36,55 @@ body {
 }
 
 .cell {
-    border: 1px solid black;
+    color: rgb(213, 235, 248);
+    border: 3px solid rgb(213, 235, 248);
+    display: flex;
+    justify-content: center;
+    
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
     width: 150px;
     height: 150px;
-
+    font-size: 6.5rem;
 }
 
 .winningLine {
-    background-color: red;
+    color: rgb(179, 210, 228);
+    background-color: rgb(213, 235, 248);
+}
+
+#start-game-btn {
+    padding: 0.45rem 0.8rem;
+    border-radius: 7px;
+    border-color: rgb(179, 210, 228);
+    color: rgb(55, 103, 131);
+    background-color: rgb(179, 210, 228);
+}
+
+#start-game-btn:hover {
+    cursor: pointer;
+}
+
+.player-names {
+    color: gray;
+    background-color: rgb(242, 247, 250);
+    border-color: rgb(242, 247, 250);
+    border-radius: 4px;
+    padding: 0.45rem 0.8rem;
+    outline: none;
+}
+
+#player-turn {
+    color: rgb(213, 235, 248);
+}
+
+#restart-btn {
+    width: 6rem;
+    height: 2.2rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 7px;
+    border-color: rgb(179, 210, 228);
+    color: rgb(55, 103, 131);
+    background-color: rgb(179, 210, 228);
 }
