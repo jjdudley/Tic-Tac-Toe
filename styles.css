@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    text-decoration: none;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -18,9 +17,17 @@ body {
     justify-content: center;
     align-content: center;
 }
-
+#start-game-form {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
 #game-title {
+    font-size: 20pt;
     color: rgb(213, 235, 248);
+    justify-self: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 #game-board {
     width: 468px;

@@ -79,6 +79,8 @@ const game = (() => {
                 restartBtn.style.visibility = 'hidden';
                 cellElements.forEach(cell => {
                     cell.innerText = '';
+                    cell.setAttribute('id', '');
+                    cell.setAttribute('class', 'cell');
                 });
             }
 
@@ -124,7 +126,7 @@ const game = (() => {
     function addToBoard(e) {
         let cell = e.target;
         let selectedCell = cellArray.indexOf(cell);
-        cell.setAttribute("id", selectedCell);
+        cell.setAttribute('id', selectedCell);
 
         if(x_turn) {
             cell.innerText = player1.mark;
